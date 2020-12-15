@@ -1,8 +1,8 @@
 import React, {
     useState,
-    useEffect
+    useEffect,
+    useCallback
 } from 'react'
-
 
 import Header from '../header';
 import ExpensesToday from '../expensesToday';
@@ -22,56 +22,39 @@ const Main = ( { sources } ) => {
         }
     }, [allData]);
 
-    const createNewExpense = (item, num) => {
+    const createNewExpense = useCallback((item, num) => {
         return {
             [item]: num
         }
-    }
+    }, [])
 
-    const addItem = (newValue, newType) => {
+    const addItem = useCallback((newValue, newType) => {
         const newItem = createNewExpense(newType, newValue);
 
         if (typeof(allData) === 'object') {
-            const dataArr = Array.from(allData);
-            let checkArr = [];
 
-            let filtData = dataArr.map((item) => {
-
-                if(item[newType]) {
-                    let sumValues = +item[newType] + +newValue;
-                    checkArr.push(true);
-                    return (
-                        {
-                            [newType]: sumValues
-                        }
-                    )
-                } else {
-                    checkArr.push(false);
-                    return item;
-                }
-            })
-
-            if(checkArr.includes(true)) {
-                return setAllData(filtData);
+            if (newType in allData) {
+                const thisValue = allData[newType];
+                allData[newType] = thisValue + newValue;
             } else {
-                allData.push(newItem);
-                return setAllData(allData);
+                allData[newType] = newValue
             }
 
+            return setAllData(allData); 
         } else {
-            return setAllData([newItem]);
+            return setAllData(newItem);
         }
-    }
+    }, [allData, setAllData, createNewExpense])
 
-    const calcSumToday = (newValue) => {
+    const calcSumToday = useCallback((newValue) => {
         const newSumToday = + newValue + sumToday;
         setSumToday(newSumToday);
-    }
+    }, [sumToday])
 
-    const calcSumFull = (newValue) => {
+    const calcSumFull = useCallback((newValue) => {
         const newSumFull = + newValue + sumFull;
         setSumFull(newSumFull);
-    }
+    }, [sumFull])
 
     const cleanToday = () => {
         setSumToday(0);

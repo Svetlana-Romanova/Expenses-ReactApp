@@ -1,5 +1,6 @@
 import React, {
-    useState
+    useState,
+    useCallback
 } from 'react'
 
 import styles from './addExpenses.module.css';
@@ -9,16 +10,15 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday }) => {
     const [ value, setValue ] = useState('');
     const [ typeExpense, setTypeExpense ] = useState('');
 
-    
-    const pushValue = (el) => {
-        setValue(el.value);
-    }
+    const pushValue = useCallback((el) => {
+        setValue(+el.value);
+    }, [])
 
-    const pushTypeExpense = (e) => {
+    const pushTypeExpense = useCallback((e) => {
         setTypeExpense(e.currentTarget.value);
-    }
+    }, [])
 
-    const changeValue = (e) => {
+    const changeValue = useCallback((e) => {
         e.preventDefault();
         if (value > 0 && typeExpense !== '') {
             addItem(value, typeExpense);
@@ -27,14 +27,13 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday }) => {
         }
         setValue('');
         setTypeExpense('');
-    }
+    }, [addItem, calcSumFull, calcSumToday, typeExpense, value])
 
-        const sourcesArr = Array.from(sources);
-        const listItems = sourcesArr.map((el) => {
-            return (
-                <option value={el}>{el}</option>
-            )
-        })
+    const listItems = sources.map((el) => {
+        return (
+            <option value={el}>{el}</option>
+        )
+    })
 
     return (
         <div className={styles.addExpenses}>

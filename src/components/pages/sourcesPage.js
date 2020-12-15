@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -9,20 +9,19 @@ const SourcesPage = ({ sources, setListSources }) => {
     const [ value, setValue ] = useState('');
     const [ allSources, setAllSources ] = useState(sources);
 
-    const setInputValue = (el) => {
+    const setInputValue = useCallback((el) => {
         setValue(el.value);
-    }
+    }, [])
 
-    const setListSoutces = (e) => {
+    const setListSoutces = useCallback((e) => {
         e.preventDefault();
         allSources.push(value);
         setAllSources(allSources);
         setListSources(allSources);
         setValue('');
-    }
+    }, [allSources, setAllSources, setListSources, value])
 
-    const newArr = Array.from(allSources);
-    const listItem = newArr.map((el) => {
+    const listItem = allSources.map((el) => {
         return (
             <li className={styles.sourcesPageItem}>
                 {el}
