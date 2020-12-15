@@ -1,0 +1,16 @@
+.sourcesPageHeader {
+    text-align: center;
+}
+
+.sourcesPageList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sourcesPageItem::before {
+    content:  "\2014\a0";
+}
+
+form {
+    margin: 1rem 0;
+}

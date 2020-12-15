@@ -1,0 +1,18 @@
+.header {
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+.headerList {
+    padding: 0;
+}
+
+.headerItem {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.headerItemName {
+    padding-right: 1rem;
+}
