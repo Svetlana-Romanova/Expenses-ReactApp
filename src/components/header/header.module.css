@@ -5,14 +5,7 @@
 
 .headerList {
     padding: 0;
-}
-
-.headerItem {
-    list-style-type: none;
     display: flex;
-    justify-content: space-around;
-}
-
-.headerItemName {
-    padding-right: 1rem;
+    flex-direction: column;
+    align-items: center;
 }

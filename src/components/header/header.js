@@ -1,27 +1,15 @@
-import React from 'react'
+import React from 'react';
+import RenderItemsLists from '../renderItemsList';
 
 import styles from './header.module.css'
 
-const Header = ({ dataList, sumFull }) => {
-
-    const list = (data) => {
-        let content = [];
-        for (let key in data) {
-            content.push(
-                <li className={styles.headerItem}>
-                    <span value={key} className={styles.headerItemName}>{key}</span>
-                    <span>{data[key]}</span>
-                </li>
-            )
-        }
-        return content;
-    }
+const Header = ({ sumFull, sumFullData }) => {
 
     return (
         <React.Fragment>
             <h2 className={styles.header}>Total expenses: {sumFull}</h2>
             <ul className={styles.headerList}>
-                {list(dataList)}
+                <RenderItemsLists dataList={sumFullData} />
             </ul>
         </React.Fragment>
     )

@@ -5,7 +5,7 @@ import React, {
 
 import styles from './addExpenses.module.css';
 
-const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday }) => {
+const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull }) => {
 
     const [ value, setValue ] = useState('');
     const [ typeExpense, setTypeExpense ] = useState('');
@@ -22,16 +22,21 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday }) => {
         e.preventDefault();
         if (value > 0 && typeExpense !== '') {
             addItem(value, typeExpense);
+            addItemFull(value, typeExpense);
             calcSumFull(value);
             calcSumToday(value);
         }
         setValue('');
         setTypeExpense('');
-    }, [addItem, calcSumFull, calcSumToday, typeExpense, value])
+    }, [addItem, addItemFull, calcSumFull, calcSumToday, typeExpense, value]);
+
+    const getRandomId = useCallback(() => {
+        return Math.random().toString();
+    }, [])
 
     const listItems = sources.map((el) => {
         return (
-            <option value={el}>{el}</option>
+            <option value={el} key={getRandomId()}>{el}</option>
         )
     })
 

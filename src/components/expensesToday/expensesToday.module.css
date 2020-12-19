@@ -8,13 +8,3 @@
 .expensesList {
     padding: 0;
 }
-
-.expensesItem {
-    list-style-type: none;
-    display: flex;
-    /* justify-content: space-around; */
-}
-
-.expensesItemName {
-    padding-right: 1rem;
-}
