@@ -1,5 +1,4 @@
 import React, {
-    useState,
     useCallback
 } from 'react'
 
@@ -8,12 +7,9 @@ import ExpensesToday from '../expensesToday';
 import AddExpenses from '../addExpenses';
 import Footer from '../footer';
 
-const Main = ( { sources } ) => {
+const Main = ( { sources, data } ) => {
 
-    const [ allData, setAllData] = useState(0);
-    const [ sumToday, setSumToday ] = useState(0);
-    const [ sumFull, setSumFull ] = useState(0);
-    const [ sumFullData, setSumFullData ] = useState(0);
+    const [ allData, setAllData, sumToday, setSumToday, sumFull, setSumFull, sumFullData, setSumFullData ] = data;
 
     const createNewExpense = (item, num) => {
         return (

@@ -45,7 +45,7 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull 
             <h3>Add expense</h3>
             <form className={styles.formAddExpenses}>
                 <input 
-                    type="text"
+                    type="number"
                     name="expense"
                     className={styles.form}
                     placeholder="Expense"
