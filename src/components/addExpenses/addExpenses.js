@@ -9,8 +9,10 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull 
 
     const [ value, setValue ] = useState('');
     const [ typeExpense, setTypeExpense ] = useState('');
+    const [ ans, setAns ] = useState(true);
 
     const pushValue = useCallback((el) => {
+        setAns(false);
         setValue(+el.value);
     }, [])
 
@@ -26,6 +28,7 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull 
             calcSumFull(value);
             calcSumToday(value);
         }
+        setAns(true);
         setValue('');
         setTypeExpense('');
     }, [addItem, addItemFull, calcSumFull, calcSumToday, typeExpense, value]);
@@ -62,6 +65,7 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull 
                 <button 
                     className={styles.buttonAdd} 
                     onClick={(e) => changeValue(e)}
+                    disabled={ans}
                 >
                     Add expense
                 </button>

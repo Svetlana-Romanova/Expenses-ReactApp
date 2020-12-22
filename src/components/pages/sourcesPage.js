@@ -9,6 +9,10 @@ const SourcesPage = ({ sources, setListSources }) => {
     const [ value, setValue ] = useState('');
     const [ allSources, setAllSources ] = useState(sources);
 
+    const getRandomId = useCallback(() => {
+        return Math.random().toString();
+    }, [])
+
     const setInputValue = useCallback((el) => {
         setValue(el.value);
     }, [])
@@ -23,7 +27,7 @@ const SourcesPage = ({ sources, setListSources }) => {
 
     const listItem = allSources.map((el) => {
         return (
-            <li className={styles.sourcesPageItem}>
+            <li className={styles.sourcesPageItem} key={getRandomId()}>
                 {el}
             </li>
         )
