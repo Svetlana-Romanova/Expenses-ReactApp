@@ -1,6 +1,7 @@
 import React, {
     useState,
-    useCallback
+    useCallback,
+    useEffect
 } from 'react'
 
 import styles from './addExpenses.module.css';
@@ -11,9 +12,16 @@ const AddExpenses = ({ sources, addItem, calcSumFull, calcSumToday, addItemFull 
     const [ typeExpense, setTypeExpense ] = useState('');
     const [ ans, setAns ] = useState(true);
 
+    useEffect(() => {
+        if(value && typeExpense) {
+            setAns(false);
+        } else {
+            setAns(true);
+        }
+    }, [value, typeExpense]); 
+
     const pushValue = useCallback((el) => {
-        setAns(false);
-        setValue(+el.value);
+        (el.value) ? setValue(+el.value) : setValue('');
     }, [])
 
     const pushTypeExpense = useCallback((e) => {
